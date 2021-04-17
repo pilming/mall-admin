@@ -227,7 +227,7 @@
 	                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 	                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
 	                        <div class="managerCount">
-	                            <h2><%=ManagerDao.totalCount() %>명</h2>
+	                            <h2><span class = "countupValue"><%=ManagerDao.totalCount() %></span>명</h2>
 	                            <p>승인대기매니저</p>
 	                        </div>
 	                    </div>
@@ -235,7 +235,7 @@
 	                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 	                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
 	                        <div class="clientCount">
-	                            <h2><%=ClientDao.totalCount(null) %>명</h2>
+	                            <h2><span class = "countupValue"><%=ClientDao.totalCount(null) %></span>명</h2>
 	                            <p>고객수</p>
 	                        </div>
 	                    </div>
@@ -243,7 +243,7 @@
 	                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 	                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
 	                        <div class="ebookCount">
-	                            <h2><%=EbookDao.totalCount(null) %>권</h2>
+	                            <h2><span class = "countupValue"><%=EbookDao.totalCount(null) %></span>권</h2>
 	                            <p>E-book수</p>
 	                        </div>
 	                    </div>
@@ -251,7 +251,7 @@
 	                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 	                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
 	                        <div class="orderCount">
-	                            <h2><%=OrdersDao.totalCount()%>건</h2>
+	                            <h2><span class = "countupValue"><%=OrdersDao.totalCount()%></span>건</h2>
 	                            <p>누적주문수</p>
 	                        </div>
 	                    </div>
@@ -474,7 +474,32 @@
 	}
 %>
 
-    
+    <script type="text/javascript">
+	function animateValue(obj, start, end, duration) { 
+		let startTimestamp = null; //초기 타임스탬프
+		var i =0;
+		const step = (timestamp) => {
+			if (!startTimestamp) startTimestamp = timestamp; //최초 타임스탬프 설정		
+			const progress = Math.min((timestamp - startTimestamp) / duration, 1); //시간을 이용해서 값증가
+			obj.innerHTML = Math.floor(progress * (end - start) + start); //원하는duration에 맞춰서 숫자출력속도 조절
+			/*
+			console.log("i :"+ i);
+			console.log(progress);
+			console.log(progress * (end - start) + start);
+			console.log(Math.floor(progress * (end - start) + start));
+			i += 1;
+			*/
+			if (progress < 1) {
+			  window.requestAnimationFrame(step);
+			}
+		};
+		window.requestAnimationFrame(step);
+	}
+	const obj = document.getElementsByClassName("countupValue");
+	for(var i =0; i < obj.length; i++) {
+		animateValue(obj[i], 0 , obj[i].innerHTML, 1000);
+	}
+	</script>
     <!-- jquery
 		============================================ -->
     <script src="<%=request.getContextPath()%>/js/vendor/jquery-1.12.4.min.js"></script>

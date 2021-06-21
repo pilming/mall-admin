@@ -87,10 +87,10 @@
 							</div>
 							<form action="<%=request.getContextPath()%>/manager/loginManagerAction.jsp" method="post" class="signin-form">
 								<div class="form-group mt-3">
-									<input type="text" class="form-control" name = "managerId" required> <label class="form-control-placeholder" for="username">Username</label>
+									<input type="text" class="form-control" name = "managerId" value = "admin" required> <label class="form-control-placeholder" for="username">Username</label>
 								</div>
 								<div class="form-group">
-									<input id="password-field" type="password" name = "managerPw" class="form-control"required> <label class="form-control-placeholder" for="password">Password</label> 
+									<input id="password-field" type="password" name = "managerPw" class="form-control" value = "1234" required> <label class="form-control-placeholder" for="password">Password</label> 
 									<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 								</div>
 								<div class="form-group">
